@@ -28,13 +28,14 @@ public class NewsFragment extends Fragment implements NewsView {
     private View inflate;
     private ListView listView;
     private NewsPresenterImpel presenterImpel;
+    private Handler handler=new Handler();
+    //具体的数据加载操作
     private Runnable LOAD_DATA=new Runnable(){
         @Override
         public void run() {
             presenterImpel.loadData();
         }
     };
-    private Handler handler=new Handler();
     private ListAda listAda;
 
     public NewsFragment() {
