@@ -21,7 +21,6 @@ public class NewsPresenterImpel implements NewsPresenter {
 
     @Override
     public void loadData() {
-        newsDatas= newsModel.initData();
         newsView.setData(newsDatas);
     }
 }

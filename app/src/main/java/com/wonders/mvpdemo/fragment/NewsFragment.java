@@ -85,6 +85,7 @@ public class NewsFragment extends Fragment implements NewsView {
      */
     @Override
     public void setData(List<NewsData.NewslistBean> newsData) {
-
+        listAda.addData(newsData);
+        listAda.notifyDataSetChanged();
     }
 }

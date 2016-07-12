@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface NewsModel {
     List<NewsData.NewslistBean> initData();
+    void getData();
 }
