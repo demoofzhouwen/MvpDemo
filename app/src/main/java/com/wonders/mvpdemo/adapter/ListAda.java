@@ -1,13 +1,16 @@
 package com.wonders.mvpdemo.adapter;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.wonders.mvpdemo.R;
 import com.wonders.mvpdemo.data.NewsData;
 import com.wonders.mvpdemo.presenter.NewsPresenter;
@@ -22,9 +25,11 @@ import java.util.List;
 public class ListAda extends BaseAdapter {
     private List<NewsData.NewslistBean> newslist;
     private Context context;
+    private Fragment fragment;
     private  ViewHolder viewHolder;
-    public ListAda(Context context) {
-        this.context=context;
+    public ListAda(Fragment fragment) {
+        this.fragment=fragment;
+        this.context=fragment.getContext();
         newslist=new ArrayList<>();
     }
 
@@ -70,15 +75,24 @@ public class ListAda extends BaseAdapter {
         }
         viewHolder.title.setText(newslist.get(position).getTitle());
         viewHolder.description.setText(newslist.get(position).getDescription());
+        String priUrl=newslist.get(position).getPicUrl();
+        Glide.with(fragment)
+                .load(priUrl)
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher)
+                .crossFade()
+                .into(viewHolder.pri);
         return convertView;
     }
     class ViewHolder{
         TextView title;
         TextView description;
+        ImageView pri;
 
         public ViewHolder(View convertView) {
             title=(TextView) convertView.findViewById(R.id.tv_title);
             description=(TextView) convertView.findViewById(R.id.tv_description);
+            pri=(ImageView)(convertView).findViewById(R.id.iv_pic);
         }
     }
 }

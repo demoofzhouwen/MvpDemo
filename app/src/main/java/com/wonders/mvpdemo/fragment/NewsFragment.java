@@ -61,7 +61,7 @@ public class NewsFragment extends Fragment implements NewsView {
     private void initView(LayoutInflater inflater, ViewGroup container) {
         inflate = inflater.inflate(R.layout.fragment_news, container, false);
         listView = (ListView) inflate.findViewById(R.id.lv);
-        listAda = new ListAda(this.getContext());
+        listAda = new ListAda(this);
         listView.setAdapter(listAda);
         presenterImpel = new NewsPresenterImpel(this);
     }
