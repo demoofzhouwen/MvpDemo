@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".view.MainActivity">
+    <com.wonders.mvpdemo.customview.TopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#00b3ff"
+        custom:RightText="添加"
+        custom:RightTextColor="#000000"
+        custom:LeftBackground="@drawable/icon_more"
+        custom:RightBackground="@drawable/icon_plus"
+        custom:TopBarTitle="微信热门精选"
+        custom:TitleTextColor="#ffffff"
+        custom:TitleTextSiza="14sp"/>
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</RelativeLayout>
+</LinearLayout>
