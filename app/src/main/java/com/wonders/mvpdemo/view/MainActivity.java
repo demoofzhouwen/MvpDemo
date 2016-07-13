@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         fragments.add(new NewsFragment());
         fragments.add(new Fragment());
+        fragments.add(new Fragment());
+        fragments.add(new Fragment());
         adapter.addFragment(fragments);
     }
 }

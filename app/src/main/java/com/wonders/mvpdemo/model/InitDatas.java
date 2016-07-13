@@ -2,9 +2,11 @@ package com.wonders.mvpdemo.model;
 
 import com.wonders.mvpdemo.data.NewsData;
 
+import java.util.List;
+
 /**
- * Created by bio on 2016/7/12.
+ *定义modul层向presenter层传输数据接口
  */
 public interface InitDatas {
-    void initData(NewsData newsData);
+    void setDataToPre(List<NewsData.NewslistBean> newsData);
 }

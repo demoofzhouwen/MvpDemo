@@ -19,8 +19,9 @@ public class HttpUtil {
 			client.addHeader(key,value);
 	        client.get(urlString, res);
 	    }
-	    public static void get(String urlString,RequestParams params,AsyncHttpResponseHandler res)
+	    public static void get(String urlString,RequestParams params,AsyncHttpResponseHandler res,String key,String value)
 	    {
+			client.addHeader(key,value);
 	        client.get(urlString, params,res);
 	    }
 	    public static void get(String urlString,JsonHttpResponseHandler res)

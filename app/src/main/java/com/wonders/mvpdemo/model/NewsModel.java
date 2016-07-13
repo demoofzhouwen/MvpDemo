@@ -1,13 +1,10 @@
 package com.wonders.mvpdemo.model;
 
-import com.wonders.mvpdemo.data.NewsData;
 
-import java.util.List;
 
 /**
- * Created by bio on 2016/7/1.
+ * 定义modul层获取数据接口
  */
 public interface NewsModel {
-    List<NewsData.NewslistBean> initData();
     void getData();
 }

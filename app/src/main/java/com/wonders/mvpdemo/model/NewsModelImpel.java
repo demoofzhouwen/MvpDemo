@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.wonders.mvpdemo.data.NewsData;
 import com.wonders.mvpdemo.httputils.HttpUtil;
 
@@ -20,23 +21,16 @@ public class NewsModelImpel implements NewsModel {
     private String key="apikey";
     private String value="5127c770a0ac79ce58099983e3a29b37";
     private NewsData newsData;
-    private InitDatas datas;
-
-    public InitDatas getDatas() {
-        return datas;
-    }
-
-    public void setDatas(InitDatas datas) {
-        this.datas = datas;
-    }
-
-    @Override
-    public List<NewsData.NewslistBean> initData() {
-        return newsData.getNewslist();
+    private InitDatas dataToPre;
+    public void setDataToPre(InitDatas dataToPre) {
+        this.dataToPre = dataToPre;
     }
     @Override
     public void getData() {
-        HttpUtil.get(url, new AsyncHttpResponseHandler() {
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("num","10");
+        requestParams.put("page","1");
+        HttpUtil.get(url,requestParams,  new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String body = new String(responseBody);
@@ -44,7 +38,9 @@ public class NewsModelImpel implements NewsModel {
                 ObjectMapper mapper=new ObjectMapper();
                 try {
                     newsData = mapper.readValue(body, NewsData.class);
-                    datas.initData(newsData);
+                    if(newsData.getMsg().equals("success")){
+                        dataToPre.setDataToPre(newsData.getNewslist());
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -55,5 +51,4 @@ public class NewsModelImpel implements NewsModel {
             }
         },key,value );
     }
-
 }
