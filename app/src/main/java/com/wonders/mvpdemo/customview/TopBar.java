@@ -2,19 +2,27 @@ package com.wonders.mvpdemo.customview;
 
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.easyandroidanimations.library.RotationAnimation;
 import com.wonders.mvpdemo.R;
 
 /**
@@ -38,6 +46,7 @@ public class TopBar extends RelativeLayout {
     private ImageView mRightButton;
     private TextView mTitleView;
     private TopBarClickListener mListener;
+    private Context context;
 
     public TopBar(Context context) {
         super(context);
@@ -47,6 +56,7 @@ public class TopBar extends RelativeLayout {
         super(context, attrs);
         getAttribute(context,attrs);
         addCustomView(context);
+        this.context=context;
         setListener();
 
     }
@@ -78,12 +88,13 @@ public class TopBar extends RelativeLayout {
         this.mListener = mListener;
     }
 
-    private void setListener() {
+    private void setListener( ) {
         mLeftButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mListener!=null){
-                    mListener.leftClick();
+                    new RotationAnimation(mLeftButton).setPivot(RotationAnimation.PIVOT_CENTER).animate();
+                    mListener.leftClick(v);
                 }
             }
         });
@@ -91,11 +102,14 @@ public class TopBar extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if(mListener!=null){
-                    mListener.rightClick();
+                    mListener.rightClick(v);
                 }
             }
         });
     }
+
+
+
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void addCustomView(Context context) {
