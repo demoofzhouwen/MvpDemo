@@ -82,13 +82,17 @@ public class TopBar extends RelativeLayout {
         mLeftButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.leftClick();
+                if(mListener!=null){
+                    mListener.leftClick();
+                }
             }
         });
         mRightButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.rightClick();
+                if(mListener!=null){
+                    mListener.rightClick();
+                }
             }
         });
     }
@@ -119,6 +123,7 @@ public class TopBar extends RelativeLayout {
         mLeftParams.setMargins(leftPx,topPx,0,topPx);
         mLeftParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT,TRUE);
         mLeftParams.addRule(RelativeLayout.CENTER_VERTICAL,TRUE);
+        mLeftButton.setPadding(0,80,0,80);
         mLeftButton.setLayoutParams(mLeftParams);
         addView(mLeftButton,mLeftParams);
 
@@ -127,6 +132,7 @@ public class TopBar extends RelativeLayout {
         int topPx2 = dip2px(context, 6);
         mRightParams.setMargins(0,topPx2,leftPx2,topPx2);
         mRightParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,TRUE);
+        mRightButton.setPadding(0,80,0,80);
         addView(mRightButton,mRightParams);
 
         mTitleParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
