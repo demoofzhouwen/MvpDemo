@@ -1,5 +1,7 @@
 package com.wonders.mvpdemo.model;
 
+import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,14 +24,28 @@ public class NewsModelImpel implements NewsModel {
     private String value="5127c770a0ac79ce58099983e3a29b37";
     private NewsData newsData;
     private InitDatas dataToPre;
+    private String src;
+    private String rand;
+
     public void setDataToPre(InitDatas dataToPre) {
         this.dataToPre = dataToPre;
     }
     @Override
-    public void getData() {
+    public void getData(Bundle data) {
         RequestParams requestParams = new RequestParams();
         requestParams.put("num","10");
         requestParams.put("page","1");
+        if(data!=null){
+            Bundle data1 = data.getBundle("data");
+            src=data1.getString("popTitle");
+            rand=data1.getString("popRand");
+        }
+        if(!TextUtils.isEmpty(src)){
+            requestParams.put("src",src);
+        }
+        if(!TextUtils.isEmpty(rand)){
+            requestParams.put("rand",rand);
+        }
         HttpUtil.get(url,requestParams,  new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

@@ -1,8 +1,11 @@
 package com.wonders.mvpdemo.presenter;
 
+import android.os.Bundle;
+
 /**
- * Created by bio on 2016/7/1.
+ *
  */
 public interface NewsPresenter {
     void loadData();
+    void loadData(Bundle data);
 }

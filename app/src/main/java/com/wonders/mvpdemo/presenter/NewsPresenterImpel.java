@@ -1,5 +1,7 @@
 package com.wonders.mvpdemo.presenter;
 
+import android.os.Bundle;
+
 import com.wonders.mvpdemo.data.NewsData;
 import com.wonders.mvpdemo.model.InitDatas;
 import com.wonders.mvpdemo.model.NewsModelImpel;
@@ -12,6 +14,7 @@ import java.util.List;
 public class NewsPresenterImpel implements NewsPresenter, InitDatas {
     private NewsView newsView;//view层引用
     private NewsModelImpel newsModel;//newsmodul层引用
+    private Bundle bundle;
     public NewsPresenterImpel(NewsView newsView) {
         this.newsView=newsView;
         this.newsModel=new NewsModelImpel();
@@ -20,7 +23,12 @@ public class NewsPresenterImpel implements NewsPresenter, InitDatas {
 
     @Override
     public void loadData() {
-        newsModel.getData();
+        newsModel.getData(bundle);
+    }
+
+    @Override
+    public void loadData(Bundle data) {
+        newsModel.getData(data);
     }
 
     @Override

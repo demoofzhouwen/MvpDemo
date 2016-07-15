@@ -49,6 +49,13 @@ public class ListAda extends BaseAdapter {
         newslist.add(datas);
     }
 
+    /**
+     *
+     * 清楚数据缓存
+     */
+    public void cleanData(){
+        newslist.clear();
+    }
     @Override
     public int getCount() {
         return newslist.size();

@@ -4,6 +4,8 @@ package com.wonders.mvpdemo.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,15 +30,24 @@ public class NewsFragment extends Fragment implements NewsView {
     private View inflate;
     private ListView listView;
     private NewsPresenterImpel presenterImpel;
+    private Bundle bundle;
     private Handler handler=new Handler();
+
     //具体的数据加载操作
     private Runnable LOAD_DATA=new Runnable(){
         @Override
         public void run() {
-            presenterImpel.loadData();
+            if(bundle==null){
+                presenterImpel.loadData();
+            }else {
+                presenterImpel.loadData(bundle);
+            }
         }
     };
     private ListAda listAda;
+    private Bundle arguments;
+    private boolean isReshing;
+
 
     public NewsFragment() {
 
@@ -48,6 +59,11 @@ public class NewsFragment extends Fragment implements NewsView {
                              Bundle savedInstanceState) {
         if (inflate == null) {
             initView(inflater, container);
+        }
+        if(arguments !=null){
+            bundle=new Bundle();
+            bundle.putBundle("data", arguments);
+            isReshing = arguments.getBoolean("isReshing",false);
         }
         handler.postDelayed(LOAD_DATA,500);
         return inflate;
@@ -64,6 +80,9 @@ public class NewsFragment extends Fragment implements NewsView {
         listAda = new ListAda(this);
         listView.setAdapter(listAda);
         presenterImpel = new NewsPresenterImpel(this);
+    }
+    public void setBundle(Bundle bundle){
+        this.arguments=bundle;
     }
 
     /**
@@ -85,7 +104,12 @@ public class NewsFragment extends Fragment implements NewsView {
      */
     @Override
     public void setData(List<NewsData.NewslistBean> newsData) {
+        if(isReshing){
+            listAda.cleanData();
+            isReshing=false;
+        }
         listAda.addData(newsData);
         listAda.notifyDataSetChanged();
     }
+
 }

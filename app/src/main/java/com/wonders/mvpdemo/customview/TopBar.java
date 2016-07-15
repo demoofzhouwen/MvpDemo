@@ -18,12 +18,14 @@ import android.view.ViewGroup;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.easyandroidanimations.library.RotationAnimation;
 import com.wonders.mvpdemo.R;
+import com.wonders.mvpdemo.adapter.PopAdapter;
 
 /**
  *
@@ -46,7 +48,6 @@ public class TopBar extends RelativeLayout {
     private ImageView mRightButton;
     private TextView mTitleView;
     private TopBarClickListener mListener;
-    private Context context;
 
     public TopBar(Context context) {
         super(context);
@@ -56,7 +57,6 @@ public class TopBar extends RelativeLayout {
         super(context, attrs);
         getAttribute(context,attrs);
         addCustomView(context);
-        this.context=context;
         setListener();
 
     }
@@ -116,7 +116,6 @@ public class TopBar extends RelativeLayout {
         mLeftButton = new ImageView(context);
         mRightButton = new ImageView(context);
         mTitleView = new TextView(context);
-
         //mLeftButton.setTextColor(mLeftTextColor);
         mLeftButton.setBackground(mLeftBackground);
         //mLeftButton.setText(mLeftText);
@@ -154,7 +153,6 @@ public class TopBar extends RelativeLayout {
         mTitleParams.setMargins(dplr,0,dplr,0);
         mTitleParams.addRule(RelativeLayout.CENTER_IN_PARENT,TRUE);
         addView(mTitleView,mTitleParams);
-
     }
 
     public TopBar(Context context, AttributeSet attrs, int defStyleAttr) {

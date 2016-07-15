@@ -17,7 +17,7 @@
         custom:RightBackground="@drawable/icon_plus"
         custom:TopBarTitle="微信热门精选"
         custom:TitleTextColor="#ffffff"
-        custom:TitleTextSiza="14sp"/>
+        custom:TitleTextSiza="10sp"/>
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
